@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "959370965554",
+    "firebase_url": "https://teme-7a2c9.firebaseio.com",
+    "project_id": "teme-7a2c9",
+    "storage_bucket": "teme-7a2c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959370965554:android:9d9c23efffa3f40eec422b",
+        "android_client_info": {
+          "package_name": "com.almisbahts.teme_doc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959370965554-lpfclukj5mkps2sllh386tep5sch71oe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoLWv_LH3RCzEYgyGiBeVPw8vT9nM9HRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959370965554-lpfclukj5mkps2sllh386tep5sch71oe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "959370965554-bra4p07tbv942ve2rureerccikh1dtso.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.almisbahts.teme"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959370965554:android:d0b4ed965219cf7cec422b",
+        "android_client_info": {
+          "package_name": "com.example.teme_doctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959370965554-lpfclukj5mkps2sllh386tep5sch71oe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoLWv_LH3RCzEYgyGiBeVPw8vT9nM9HRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959370965554-lpfclukj5mkps2sllh386tep5sch71oe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "959370965554-bra4p07tbv942ve2rureerccikh1dtso.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.almisbahts.teme"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
