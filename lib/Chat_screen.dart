@@ -18,8 +18,6 @@ class _ChatScreenState extends State<ChatScreen> {
   final messageController = TextEditingController();
   String msgId = "";
 
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,10 +80,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                           .toString());
                                   String time = DateFormat('dd MMM hh:mm a')
                                       .format(myDateTime);
-                                  String date =
-                                      DateFormat('dd MMM').format(myDateTime);
-                                  //abcd
-
                                   msgId = msgdata["MessageID"];
                                   final bool isMe =
                                       msgdata["Sender"] == "Doctor";
@@ -111,7 +105,8 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
- _buildMessage(String time, String message, bool isMe) {
+
+  _buildMessage(String time, String message, bool isMe) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.75,
       margin: isMe
@@ -187,9 +182,12 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
+
   void createRecord() async {
+    String msgTxt = messageController.text;
+    messageController.text = "";
     await databaseReference.collection("messages").add({
-      'Message': '${messageController.text}',
+      'Message': '$msgTxt',
       'Sender': 'Doctor',
       'Receiver': 'User',
       'DoctorID': chatdata['DoctorID'],
@@ -208,12 +206,10 @@ class _ChatScreenState extends State<ChatScreen> {
       'LastMessageTime': FieldValue.serverTimestamp(),
       'SeenbyDoctor': "yes",
       'SeenbyUser': "no",
-      'UnreadCount': "0",
       'UserID': chatdata['UserID'],
       'DoctorProfile': chatdata["DoctorProfile"],
       'UserProfile': chatdata["UserProfile"],
       'UserName': chatdata['UserName']
     });
-    messageController.text = "";
   }
 }

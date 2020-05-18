@@ -8,10 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:teme_doctor/login2.dart';
 import 'package:intl/intl.dart';
 
-// import 'package:teme_doctor/pending.dart';
-// import 'package:time_formatter/time_formatter.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:teme_doctor/DashBord.dart';
 class DashBoard extends StatefulWidget {
   DashBoard(this.doctorid);
   final doctorid;
@@ -78,17 +74,6 @@ class _DashBoardState extends State<DashBoard> {
                   topLeft: Radius.circular(30.0),
                   topRight: Radius.circular(30.0))),
           child: chatlist(),
-          // child: SizedBox(
-          //       height: 250,
-          //       width: double.infinity,
-          //       child: CachedNetworkImage(
-          //         imageUrl:
-          //             "https://images.unsplash.com/photo-1584551882802-ca081b505b49?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1450&q=80",
-          //         placeholder: (context, url) => CircularProgressIndicator(),
-          //         errorWidget: (context, url, error) => Icon(Icons.error),
-          //         fit: BoxFit.cover,
-          //       ),
-          //     ),
         ),
       ),
     );
@@ -108,10 +93,8 @@ class _DashBoardState extends State<DashBoard> {
         child: StreamBuilder(
             stream: Firestore.instance
                 .collection('chat')
-                //  .orderBy('LastMessageTime')
-                .where('DoctorID', isEqualTo: doctorid["DoctorId"])
-                // .orderBy('LastMessageTime', descending: true)
-                .limit(20)
+                .orderBy('LastMessageTime',descending: true)
+                .where('DoctorID', isEqualTo: doctorid["DoctorID"])
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -129,7 +112,11 @@ class _DashBoardState extends State<DashBoard> {
                 return Column(
                   children: <Widget>[
                     Center(child: Text("Their Is No Chat")),
-                    Center(child: Text("Check Your Internet Conectin/Chat is loading...",style: TextStyle(fontSize: 10,color: Colors.grey),))
+                    Center(
+                        child: Text(
+                      "Check Your Internet Conectin/Chat is loading...",
+                      style: TextStyle(fontSize: 10, color: Colors.grey),
+                    ))
                   ],
                 );
               }

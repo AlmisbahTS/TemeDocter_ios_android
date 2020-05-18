@@ -5,7 +5,7 @@ import 'package:teme_doctor/login2.dart';
 // import 'package:teme_doctor/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:login/login.dart';
+// import 'package:login/login.dart';
 import 'package:teme_doctor/pending.dart';
 
 // import 'package:teme/home.dart';
@@ -52,10 +52,11 @@ class _HomePageState extends State<Home> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100)),
                       onPressed: () {
-                        Login(
-                          loggedIn: signin2(),
-                          loggedOut: signout(),
-                        );
+                        signout();
+                        // Login(
+                        //   loggedIn: signin2(),
+                        //   loggedOut: signout(),
+                        // );
                       },
                       child: Text(
                         "Login",

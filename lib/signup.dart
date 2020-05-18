@@ -33,8 +33,8 @@ class _SignupState extends State<SignUp> {
       _password;
   int gender = 0;
 
-  int _stateMedicalCouncil = 1;
-  var _specialtyValue;
+  var _stateMedicalCouncil = "BOP";
+  var _specialtyValue="Brain";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -271,7 +271,7 @@ class _SignupState extends State<SignUp> {
                                     value: _stateMedicalCouncil,
                                     items: [
                                       DropdownMenuItem(
-                                          value: 1,
+                                          value: "BOP",
                                           child: Text(
                                             "BOP",
                                             style: TextStyle(
@@ -280,7 +280,7 @@ class _SignupState extends State<SignUp> {
                                             ),
                                           )),
                                       DropdownMenuItem(
-                                          value: 2,
+                                          value: "FFNCS",
                                           child: Text(
                                             "FFNCS",
                                             style: TextStyle(
@@ -350,7 +350,7 @@ class _SignupState extends State<SignUp> {
                                                     171, 31, 94, 1),
                                               ),
                                             ),
-                                            value: "${snap.documentID}",
+                                            value: "${snap['Title']}",
                                           ));
                                         }
                                         return Container(
@@ -395,7 +395,7 @@ class _SignupState extends State<SignUp> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  "Take A Selfie",
+                                  "Select Profile Picture",
                                   style: TextStyle(
                                       color: Color.fromRGBO(171, 31, 94, 1),
                                       fontSize: 16),
@@ -405,7 +405,6 @@ class _SignupState extends State<SignUp> {
                                       // image: Image(image: _imgageSelfi)
                                       ),
                                   width: 50,
-                                
                                   child: _imgageSelfi == null
                                       ? null
                                       : Image.file(_imgageSelfi),
@@ -443,7 +442,7 @@ class _SignupState extends State<SignUp> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  "Take CNIC Picture",
+                                  "Select CNIC Picture",
                                   style: TextStyle(
                                       color: Color.fromRGBO(171, 31, 94, 1),
                                       fontSize: 16),
@@ -686,23 +685,7 @@ class _SignupState extends State<SignUp> {
 
     return urlSelfi;
   }
-  //
-  // Future<void> _uploadImageToFirebase(File image) async {
-  //   try {
-  //     // Make random image name.
-  //     int randomNumber = Random().nextInt(100000);
-  //     String imageLocation = 'images/image${randomNumber}.jpg';
-
-  //     // Upload image to firebase.
-  //     final StorageReference storageReference = FirebaseStorage().ref().child(imageLocation);
-  //     final StorageUploadTask uploadTask = storageReference.putFile(image);
-  //     await uploadTask.onComplete;
-  //     _addPathToDatabase(imageLocation);
-  //   }catch(e){
-  //     print(e.message);
-  //   }
-  // }
-//
+  
   Future signUp(context) async {
     final formState = _formKey.currentState;
     if (formState.validate()) {
@@ -721,7 +704,7 @@ class _SignupState extends State<SignUp> {
                 .collection("doctors")
                 .document(currentDoctor.user.uid)
                 .setData({
-              "DoctorId": currentDoctor.user.uid,
+              "DoctorID": currentDoctor.user.uid,
               "Email": _email,
               "FullName": _fullname,
               "PhoneNumber": _phoneNumber,

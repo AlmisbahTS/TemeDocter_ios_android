@@ -23,7 +23,7 @@ class _ProfileState extends State<Profile> {
         child: ListView(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal:10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Container(
                 width: double.infinity,
                 // height: 200,
@@ -52,7 +52,8 @@ class _ProfileState extends State<Profile> {
                         child: CircleAvatar(
 
                             // radius: 20.0,
-                            backgroundImage: NetworkImage(doctorid["urlSelfi"]))),
+                            backgroundImage:
+                                NetworkImage(doctorid["urlSelfi"]))),
                     SizedBox(
                       height: 15,
                     ),
@@ -62,8 +63,9 @@ class _ProfileState extends State<Profile> {
                           doctorid["FullName"],
                           style: Theme.of(context).textTheme.title,
                         ),
-                        Text("${doctorid['Speciality']}"),
-                        Text("Registration Year ${doctorid['RegistrationYear']}"),
+                        Text(doctorid['Specialty']),
+                        Text(
+                            "Registration Year ${doctorid['RegistrationYear']}"),
                       ],
                     )
                   ],
@@ -100,16 +102,15 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     ListTile(
-                      title: Text("Website"),
-                      subtitle: Text("almisbahts.com"),
+                      title: Text("State Medical Council:"),
+                      subtitle: Text(" ${doctorid['StateMedical']}"),
                       leading: Icon(
                         Feather.getIconData("globe"),
                       ),
                     ),
                     ListTile(
-                      title: Text("About"),
-                      subtitle: Text(
-                          "Android & IOS Developer in flutter and java. Web Developer in Laravel, ASP.net & VUE.js"),
+                      title: Text("Registration No."),
+                      subtitle: Text(doctorid['RegistrationNO']),
                       leading: Icon(
                         Feather.getIconData("info"),
                       ),
@@ -118,7 +119,6 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
             ),
-           
           ],
         ),
       ),
