@@ -706,7 +706,7 @@ class _SignupState extends State<SignUp> {
                 .setData({
               "DoctorID": currentDoctor.user.uid,
               "Email": _email,
-              "FullName": _fullname,
+              "DoctorName": _fullname,
               "PhoneNumber": _phoneNumber,
               "Gender": gender,
               "RegistrationNO": _registrationNO,

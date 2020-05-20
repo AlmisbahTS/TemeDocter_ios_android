@@ -5,15 +5,15 @@ import 'package:flutter_icons/flutter_icons.dart';
 // import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 class Profile extends StatefulWidget {
-  Profile(this.doctorid);
-  final doctorid;
+  Profile(this.doctorData);
+  final doctorData;
   @override
-  _ProfileState createState() => _ProfileState(doctorid);
+  _ProfileState createState() => _ProfileState(doctorData);
 }
 
 class _ProfileState extends State<Profile> {
-  _ProfileState(this.doctorid);
-  final doctorid;
+  _ProfileState(this.doctorData);
+  final doctorData;
 
   @override
   Widget build(BuildContext context) {
@@ -53,19 +53,19 @@ class _ProfileState extends State<Profile> {
 
                             // radius: 20.0,
                             backgroundImage:
-                                NetworkImage(doctorid["urlSelfi"]))),
+                                NetworkImage(doctorData["urlSelfi"]))),
                     SizedBox(
                       height: 15,
                     ),
                     Column(
                       children: <Widget>[
                         Text(
-                          doctorid["FullName"],
-                          style: Theme.of(context).textTheme.title,
+                          doctorData["DoctorName"],
+                          // style: Theme.of(context).textTheme.title,
                         ),
-                        Text(doctorid['Specialty']),
+                        Text(doctorData['Specialty']),
                         Text(
-                            "Registration Year ${doctorid['RegistrationYear']}"),
+                            "Registration Year ${doctorData['RegistrationYear']}"),
                       ],
                     )
                   ],
@@ -89,28 +89,28 @@ class _ProfileState extends State<Profile> {
                     Divider(),
                     ListTile(
                       title: Text("Email"),
-                      subtitle: Text(doctorid["Email"]),
+                      subtitle: Text(doctorData["Email"]),
                       leading: Icon(
                         Feather.getIconData("mail"),
                       ),
                     ),
                     ListTile(
                       title: Text("Phone Number"),
-                      subtitle: Text(doctorid["PhoneNumber"]),
+                      subtitle: Text(doctorData["PhoneNumber"]),
                       leading: Icon(
                         Feather.getIconData("phone"),
                       ),
                     ),
                     ListTile(
                       title: Text("State Medical Council:"),
-                      subtitle: Text(" ${doctorid['StateMedical']}"),
+                      subtitle: Text(" ${doctorData['StateMedical']}"),
                       leading: Icon(
                         Feather.getIconData("globe"),
                       ),
                     ),
                     ListTile(
                       title: Text("Registration No."),
-                      subtitle: Text(doctorid['RegistrationNO']),
+                      subtitle: Text(doctorData['RegistrationNO']),
                       leading: Icon(
                         Feather.getIconData("info"),
                       ),

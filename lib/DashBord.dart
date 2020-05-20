@@ -9,24 +9,24 @@ import 'package:teme_doctor/login2.dart';
 import 'package:intl/intl.dart';
 
 class DashBoard extends StatefulWidget {
-  DashBoard(this.doctorid);
-  final doctorid;
+  DashBoard(this.doctorData);
+  final doctorData;
   @override
-  _DashBoardState createState() => _DashBoardState(doctorid);
+  _DashBoardState createState() => _DashBoardState(doctorData);
 }
 
 class _DashBoardState extends State<DashBoard> {
   bool unread = true;
 
-  _DashBoardState(this.doctorid);
-  final doctorid;
+  _DashBoardState(this.doctorData);
+  final doctorData;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
         return Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => DashBoard(doctorid)));
+            MaterialPageRoute(builder: (context) => DashBoard(doctorData)));
       },
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
@@ -53,7 +53,7 @@ class _DashBoardState extends State<DashBoard> {
             InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Profile(doctorid)));
+                    MaterialPageRoute(builder: (context) => Profile(doctorData)));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -61,7 +61,7 @@ class _DashBoardState extends State<DashBoard> {
                     child: CircleAvatar(
 
                         // radius: 20.0,
-                        backgroundImage: NetworkImage(doctorid["urlSelfi"]))),
+                        backgroundImage: NetworkImage(doctorData["urlSelfi"]))),
               ),
             ),
           ],
@@ -94,7 +94,7 @@ class _DashBoardState extends State<DashBoard> {
             stream: Firestore.instance
                 .collection('chat')
                 .orderBy('LastMessageTime',descending: true)
-                .where('DoctorID', isEqualTo: doctorid["DoctorID"])
+                .where('DoctorID', isEqualTo: doctorData["DoctorID"])
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {

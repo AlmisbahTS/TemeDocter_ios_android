@@ -61,7 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: StreamBuilder(
                         stream: Firestore.instance
                             .collection('messages')
-                            .where('UserID', isEqualTo: chatdata['UserID'])
+                            .where('ChatID', isEqualTo: "${chatdata['UserID']}${['DoctorID']}")
                             .orderBy('MessageTime', descending: true)
                             .snapshots(),
                         builder: (context, snapshot) {
@@ -191,8 +191,8 @@ class _ChatScreenState extends State<ChatScreen> {
       'Sender': 'Doctor',
       'Receiver': 'User',
       'DoctorID': chatdata['DoctorID'],
-      'MessageID': "333",
-      'chatID': "${chatdata['UserID']}${['DoctorID']}",
+      
+      'ChatID': "${chatdata['UserID']}${['DoctorID']}",
       'UserID': chatdata['UserID'],
       'MessageTime': FieldValue.serverTimestamp()
     });
@@ -209,7 +209,8 @@ class _ChatScreenState extends State<ChatScreen> {
       'UserID': chatdata['UserID'],
       'DoctorProfile': chatdata["DoctorProfile"],
       'UserProfile': chatdata["UserProfile"],
-      'UserName': chatdata['UserName']
+      'UserName': chatdata['UserName'],
+      'DoctorName':chatdata['DoctorName']
     });
   }
 }
