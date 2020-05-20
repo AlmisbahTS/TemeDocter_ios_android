@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:teme_doctor/RegisterNextStep.dart';
 import 'package:teme_doctor/login2.dart';
 import 'package:teme_doctor/pending.dart';
 
@@ -34,7 +35,7 @@ class _SignupState extends State<SignUp> {
   int gender = 0;
 
   var _stateMedicalCouncil = "BOP";
-  var _specialtyValue="Brain";
+  var _specialtyValue = "Brain";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -328,48 +329,48 @@ class _SignupState extends State<SignUp> {
                                 ),
 
                                 //
-                                StreamBuilder<QuerySnapshot>(
-                                    stream: Firestore.instance
-                                        .collection('specialty')
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (!snapshot.hasData) {
-                                        return Text("Loading");
-                                      } else {
-                                        List<DropdownMenuItem> specialty = [];
-                                        for (int i = 0;
-                                            i < snapshot.data.documents.length;
-                                            i++) {
-                                          DocumentSnapshot snap =
-                                              snapshot.data.documents[i];
-                                          specialty.add(DropdownMenuItem(
-                                            child: Text(
-                                              "${snap['Title']}",
-                                              style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    171, 31, 94, 1),
-                                              ),
-                                            ),
-                                            value: "${snap['Title']}",
-                                          ));
-                                        }
-                                        return Container(
-                                            child: DropdownButton(
-                                                value: _specialtyValue,
-                                                icon: Icon(
-                                                  Icons.arrow_drop_down_circle,
-                                                  color: Color.fromRGBO(
-                                                      171, 31, 94, 1),
-                                                ),
-                                                items: specialty,
-                                                onChanged: (specialtyValue) {
-                                                  setState(() {
-                                                    _specialtyValue =
-                                                        specialtyValue;
-                                                  });
-                                                }));
-                                      }
-                                    }),
+//                                StreamBuilder<QuerySnapshot>(
+//                                    stream: Firestore.instance
+//                                        .collection('specialty')
+//                                        .snapshots(),
+//                                    builder: (context, snapshot) {
+//                                      if (!snapshot.hasData) {
+//                                        return Text("Loading");
+//                                      } else {
+//                                        List<DropdownMenuItem> specialty = [];
+//                                        for (int i = 0;
+//                                            i < snapshot.data.documents.length;
+//                                            i++) {
+//                                          DocumentSnapshot snap =
+//                                              snapshot.data.documents[i];
+//                                          specialty.add(DropdownMenuItem(
+//                                            child: Text(
+//                                              "${snap['Title']}",
+//                                              style: TextStyle(
+//                                                color: Color.fromRGBO(
+//                                                    171, 31, 94, 1),
+//                                              ),
+//                                            ),
+//                                            value: "${snap['Title']}",
+//                                          ));
+//                                        }
+//                                        return Container(
+//                                            child: DropdownButton(
+//                                                value: _specialtyValue,
+//                                                icon: Icon(
+//                                                  Icons.arrow_drop_down_circle,
+//                                                  color: Color.fromRGBO(
+//                                                      171, 31, 94, 1),
+//                                                ),
+//                                                items: specialty,
+//                                                onChanged: (specialtyValue) {
+//                                                  setState(() {
+//                                                    _specialtyValue =
+//                                                        specialtyValue;
+//                                                  });
+//                                                }));
+//                                      }
+//                                    }),
                               ],
                             ),
                           ),
@@ -475,7 +476,7 @@ class _SignupState extends State<SignUp> {
                         TextFormField(
                           validator: (input) {
                             if (input.length < 6) {
-                              return 'Password should be atleast 6 digits';
+                              return 'Password should be at least 6 digits';
                             }
                             return null;
                           },
@@ -590,25 +591,31 @@ class _SignupState extends State<SignUp> {
                             ? Center(
                                 child: CircularProgressIndicator(),
                               )
-                            : RaisedButton(
+                            : FlatButton.icon(
                                 textColor: Colors.white,
                                 color: Color.fromRGBO(171, 31, 94, 1),
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
+                                    borderRadius: BorderRadius.circular(50)),
                                 onPressed: () {
-                                  if (terms == false ||
-                                      _imgageSelfi == null ||
-                                      _imagesCNIC == null ||
-                                      _specialtyValue == null) {
-                                    setState(() {
-                                      message =
-                                          "Please Upload CNIC and Selfi And Check on Term & Conditions";
-                                    });
-                                  } else if (_formKey.currentState.validate()) {
-                                    signUp(context);
-                                  }
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignUpStep2()));
+//                                  if (terms == false ||
+//                                      _imgageSelfi == null ||
+//                                      _imagesCNIC == null ||
+//                                      _specialtyValue == null) {
+//                                    setState(() {
+//                                      message =
+//                                          "Please Upload CNIC and Photo And Check on Term & Conditions";
+//                                    });
+//                                  } else if (_formKey.currentState.validate()) {
+//                                    signUp(context);
+//                                  }
                                 },
-                                child: Text("Register")),
+                                label: Text("Next Step"),
+                                icon: Icon(Icons.arrow_forward),
+                              ),
                         SizedBox(
                           height: 10,
                         ),
@@ -685,7 +692,7 @@ class _SignupState extends State<SignUp> {
 
     return urlSelfi;
   }
-  
+
   Future signUp(context) async {
     final formState = _formKey.currentState;
     if (formState.validate()) {
@@ -706,7 +713,7 @@ class _SignupState extends State<SignUp> {
                 .setData({
               "DoctorID": currentDoctor.user.uid,
               "Email": _email,
-              "FullName": _fullname,
+              "DoctorName": _fullname,
               "PhoneNumber": _phoneNumber,
               "Gender": gender,
               "RegistrationNO": _registrationNO,

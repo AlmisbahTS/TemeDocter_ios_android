@@ -5,8 +5,10 @@ import 'package:teme_doctor/login2.dart';
 // import 'package:teme_doctor/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:login/login.dart';
+import 'package:login/login.dart';
 import 'package:teme_doctor/pending.dart';
+
+import 'RegisterNextStep.dart';
 
 // import 'package:teme/home.dart';
 // import 'package:teme/pages/feature.dart';
@@ -52,11 +54,16 @@ class _HomePageState extends State<Home> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100)),
                       onPressed: () {
-                        signout();
-                        // Login(
-                        //   loggedIn: signin2(),
-                        //   loggedOut: signout(),
-                        // );
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpStep2()));
+//
+                        // signout();
+//                        Login(
+//                          loggedIn: signin2(),
+//                          loggedOut: signout(),
+//                        );
                       },
                       child: Text(
                         "Login",
@@ -120,8 +127,8 @@ class _HomePageState extends State<Home> {
                  Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => DashBoard(result)));
               }else{
-                 Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => Login2()));
+              //    Navigator.pushReplacement(context,
+              // MaterialPageRoute(builder: (context) => Login2()));
               }
          
           // Navigator.pushReplacement(context,
@@ -130,11 +137,13 @@ class _HomePageState extends State<Home> {
 ////
       });
     } catch (e) {
-      setState(() {
-        // print(e.message);
-      });
+      // Navigator.pushReplacement(context,
+      //         MaterialPageRoute(builder: (context) => Login2()));
+      // setState(() {
+      //   // print(e.message);
+      // });
 
-      print(e.message);
+      print(e);
     }
   }
 }

@@ -214,7 +214,8 @@ class _ChatScreenState extends State<ChatScreen> {
       'UserID': chatdata['UserID'],
       'DoctorProfile': chatdata["DoctorProfile"],
       'UserProfile': chatdata["UserProfile"],
-      'UserName': chatdata['UserName']
+      'UserName': chatdata['UserName'],
+      'DoctorName': chatdata['DoctorName']
     });
   }
 }

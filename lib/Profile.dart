@@ -1,24 +1,49 @@
 import 'package:flutter/material.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter_icons/flutter_icons.dart';
-// import 'package:feathers/feathers.dart';
-// import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'login2.dart';
 
 class Profile extends StatefulWidget {
-  Profile(this.doctorid);
-  final doctorid;
+  Profile(this.doctorData);
+
+  final doctorData;
+
   @override
-  _ProfileState createState() => _ProfileState(doctorid);
+  _ProfileState createState() => _ProfileState(doctorData);
 }
 
 class _ProfileState extends State<Profile> {
-  _ProfileState(this.doctorid);
-  final doctorid;
+  _ProfileState(this.doctorData);
+
+  final doctorData;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(171, 31, 94, 1),
+      appBar: AppBar(
+        title: Text(
+          "Profile",
+          style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+        ),
+        elevation: 0.0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Feather.getIconData("log-out"),
+            ),
+            iconSize: 30.0,
+            color: Colors.white,
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              return Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Login2()));
+            },
+          ),
+        ],
+      ),
       body: Container(
         child: ListView(
           children: <Widget>[
@@ -53,19 +78,19 @@ class _ProfileState extends State<Profile> {
 
                             // radius: 20.0,
                             backgroundImage:
-                                NetworkImage(doctorid["urlSelfi"]))),
+                                NetworkImage(doctorData["urlSelfi"]))),
                     SizedBox(
                       height: 15,
                     ),
                     Column(
                       children: <Widget>[
                         Text(
-                          doctorid["FullName"],
-                          style: Theme.of(context).textTheme.title,
+                          doctorData["DoctorName"],
+                          // style: Theme.of(context).textTheme.title,
                         ),
-                        Text(doctorid['Specialty']),
+                        Text(doctorData['Specialty']),
                         Text(
-                            "Registration Year ${doctorid['RegistrationYear']}"),
+                            "Registration Year ${doctorData['RegistrationYear']}"),
                       ],
                     )
                   ],
@@ -89,28 +114,28 @@ class _ProfileState extends State<Profile> {
                     Divider(),
                     ListTile(
                       title: Text("Email"),
-                      subtitle: Text(doctorid["Email"]),
+                      subtitle: Text(doctorData["Email"]),
                       leading: Icon(
                         Feather.getIconData("mail"),
                       ),
                     ),
                     ListTile(
                       title: Text("Phone Number"),
-                      subtitle: Text(doctorid["PhoneNumber"]),
+                      subtitle: Text(doctorData["PhoneNumber"]),
                       leading: Icon(
                         Feather.getIconData("phone"),
                       ),
                     ),
                     ListTile(
                       title: Text("State Medical Council:"),
-                      subtitle: Text(" ${doctorid['StateMedical']}"),
+                      subtitle: Text(" ${doctorData['StateMedical']}"),
                       leading: Icon(
                         Feather.getIconData("globe"),
                       ),
                     ),
                     ListTile(
                       title: Text("Registration No."),
-                      subtitle: Text(doctorid['RegistrationNO']),
+                      subtitle: Text(doctorData['RegistrationNO']),
                       leading: Icon(
                         Feather.getIconData("info"),
                       ),
