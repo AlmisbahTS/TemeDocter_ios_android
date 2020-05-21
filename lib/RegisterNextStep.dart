@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'StepThree.dart';
+
 class SignUpStep2 extends StatefulWidget {
   @override
   _SignupState2 createState() => _SignupState2();
@@ -84,7 +86,6 @@ class _SignupState2 extends State<SignUpStep2> {
                           height: 30,
                         ),
                         Text(
-                          "Choose Your Speciality",
                           style: TextStyle(
                             fontSize: 22,
                             color: Color.fromRGBO(171, 31, 95, 1),
@@ -180,17 +181,17 @@ class _SignupState2 extends State<SignUpStep2> {
                         SizedBox(
                           height: 30,
                         ),
-                        FlatButton(
-                          textColor: Colors.white,
-                          color: Color.fromRGBO(171, 31, 94, 1),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          onPressed: () {},
-                          child: Text(
-                            "Register",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
+//                        FlatButton(
+//                          textColor: Colors.white,
+//                          color: Color.fromRGBO(171, 31, 94, 1),
+//                          shape: RoundedRectangleBorder(
+//                              borderRadius: BorderRadius.circular(50)),
+//                          onPressed: () {},
+//                          child: Text(
+//                            "Register",
+//                            style: TextStyle(fontSize: 15),
+//                          ),
+//                        ),
                         SizedBox(
                           height: 10,
                         )
@@ -201,42 +202,6 @@ class _SignupState2 extends State<SignUpStep2> {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class StepThree extends StatefulWidget {
-  StepThree(this.value);
-
-  final value;
-
-  @override
-  _StepThreeState createState() => _StepThreeState(value);
-}
-
-class _StepThreeState extends State<StepThree> {
-  _StepThreeState(this.value);
-
-  final value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Profile",
-          style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
-        ),
-        elevation: 0.0,
-        actions: <Widget>[
-
-        ],
-      ),
-      body: SafeArea(
-        child: Container(
-          child: value != null ? Text(value) : Text("abc"),
         ),
       ),
     );
