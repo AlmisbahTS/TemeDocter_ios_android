@@ -34,8 +34,8 @@ class _SignupState extends State<SignUp> {
   int gender = 0;
 
   var _stateMedicalCouncil = "BOP";
-  var _specialtyValue="Brain";
-
+  var _specialtyValue;
+var _degree;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -320,6 +320,83 @@ class _SignupState extends State<SignUp> {
                               children: <Widget>[
                                 Flexible(
                                   child: Text(
+                                    "Select Degree",
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(171, 31, 94, 1),
+                                        fontSize: 16),
+                                  ),
+                                ),
+
+                                //
+                                StreamBuilder<QuerySnapshot>(
+                                    stream: Firestore.instance
+                                        .collection('degree')
+                                        .snapshots(),
+                                    builder: (context, snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return Text("Loading");
+                                      } else {
+                                        List<DropdownMenuItem> degree = [];
+                                        for (int i = 0;
+                                            i < snapshot.data.documents.length;
+                                            i++) {
+                                          DocumentSnapshot snap =
+                                              snapshot.data.documents[i];
+                                          degree.add(DropdownMenuItem(
+                                            child: Text(
+                                              "${snap['Degree']}",
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    171, 31, 94, 1),
+                                              ),
+                                            ),
+                                            value: "${snap['Degree']}",
+                                          ));
+                                        }
+                                        return Container(
+                                            child: DropdownButton(
+                                                value: _degree,
+                                                icon: Icon(
+                                                  Icons.arrow_drop_down_circle,
+                                                  color: Color.fromRGBO(
+                                                      171, 31, 94, 1),
+                                                ),
+                                                items: degree,
+                                                onChanged: (degreeValue) {
+                                                  setState(() {
+                                                    _specialtyValue=null;
+                                                    _degree =
+                                                        degreeValue;
+                                                  });
+                                                }));
+                                      }
+                                    }),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: spaceBWtxtfield,
+                        ),
+                        Container(
+                          height: 50,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              border: Border.all(
+                                color: Color.fromRGBO(171, 31, 94, 1),
+                              )
+                              // color: Colors.red
+                              ),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Flexible(
+                                  child: Text(
                                     "Select Specialty",
                                     style: TextStyle(
                                         color: Color.fromRGBO(171, 31, 94, 1),
@@ -330,7 +407,7 @@ class _SignupState extends State<SignUp> {
                                 //
                                 StreamBuilder<QuerySnapshot>(
                                     stream: Firestore.instance
-                                        .collection('specialty')
+                                        .collection('specialty').where('Degree',isEqualTo: _degree)
                                         .snapshots(),
                                     builder: (context, snapshot) {
                                       if (!snapshot.hasData) {
@@ -719,7 +796,8 @@ class _SignupState extends State<SignUp> {
               "Status": "Pending",
               "urlSelfi": urlSelfi,
               "urlCNIC": urlCNIC,
-              "Specialty": _specialtyValue
+              "Specialty": _specialtyValue,
+              "Degree":_degree
             });
           }
         }).then((sec) async {

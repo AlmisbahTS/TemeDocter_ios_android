@@ -61,7 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: StreamBuilder(
                         stream: Firestore.instance
                             .collection('messages')
-                            .where('ChatID', isEqualTo: "${chatdata['UserID']}${['DoctorID']}")
+                            .where('ChatID', isEqualTo: "${chatdata['UserID']}${chatdata['DoctorID']}")
                             .orderBy('MessageTime', descending: true)
                             .snapshots(),
                         builder: (context, snapshot) {
@@ -192,25 +192,21 @@ class _ChatScreenState extends State<ChatScreen> {
       'Receiver': 'User',
       'DoctorID': chatdata['DoctorID'],
       
-      'ChatID': "${chatdata['UserID']}${['DoctorID']}",
+      'ChatID': "${chatdata['UserID']}${chatdata['DoctorID']}",
       'UserID': chatdata['UserID'],
       'MessageTime': FieldValue.serverTimestamp()
     });
     await databaseReference
         .collection("chat")
         .document("${chatdata['UserID']}${chatdata['DoctorID']}")
-        .setData({
-      'ChatID': chatdata["ChatID"],
-      'DoctorID': chatdata["DoctorID"],
+        .updateData({
+      
       'LastMessage': messageController.text,
       'LastMessageTime': FieldValue.serverTimestamp(),
       'SeenbyDoctor': "yes",
       'SeenbyUser': "no",
-      'UserID': chatdata['UserID'],
-      'DoctorProfile': chatdata["DoctorProfile"],
-      'UserProfile': chatdata["UserProfile"],
-      'UserName': chatdata['UserName'],
-      'DoctorName':chatdata['DoctorName']
+    
+      
     });
   }
 }

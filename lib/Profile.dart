@@ -63,7 +63,7 @@ class _ProfileState extends State<Profile> {
                           doctorData["DoctorName"],
                           // style: Theme.of(context).textTheme.title,
                         ),
-                        Text(doctorData['Specialty']),
+                        Text(doctorData['Degree']),
                         Text(
                             "Registration Year ${doctorData['RegistrationYear']}"),
                       ],
