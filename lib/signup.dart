@@ -552,7 +552,7 @@ var _degree;
                         TextFormField(
                           validator: (input) {
                             if (input.length < 6) {
-                              return 'Password should be atleast 6 digits';
+                              return 'Password should be at least 6 digits';
                             }
                             return null;
                           },
@@ -667,25 +667,28 @@ var _degree;
                             ? Center(
                                 child: CircularProgressIndicator(),
                               )
-                            : RaisedButton(
+                            : FlatButton.icon(
                                 textColor: Colors.white,
                                 color: Color.fromRGBO(171, 31, 94, 1),
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
+                                    borderRadius: BorderRadius.circular(50)),
                                 onPressed: () {
+
                                   if (terms == false ||
                                       _imgageSelfi == null ||
                                       _imagesCNIC == null ||
                                       _specialtyValue == null) {
                                     setState(() {
                                       message =
-                                          "Please Upload CNIC and Selfi And Check on Term & Conditions";
+                                          "Please Upload CNIC and Photo And Check on Term & Conditions";
                                     });
                                   } else if (_formKey.currentState.validate()) {
                                     signUp(context);
                                   }
                                 },
-                                child: Text("Register")),
+                                label: Text("Next Step"),
+                                icon: Icon(Icons.arrow_forward),
+                              ),
                         SizedBox(
                           height: 10,
                         ),
@@ -762,7 +765,7 @@ var _degree;
 
     return urlSelfi;
   }
-  
+
   Future signUp(context) async {
     final formState = _formKey.currentState;
     if (formState.validate()) {

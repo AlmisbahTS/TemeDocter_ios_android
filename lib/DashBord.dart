@@ -10,7 +10,9 @@ import 'package:intl/intl.dart';
 
 class DashBoard extends StatefulWidget {
   DashBoard(this.doctorData);
+
   final doctorData;
+
   @override
   _DashBoardState createState() => _DashBoardState(doctorData);
 }
@@ -19,6 +21,7 @@ class _DashBoardState extends State<DashBoard> {
   bool unread = true;
 
   _DashBoardState(this.doctorData);
+
   final doctorData;
 
   @override
@@ -31,19 +34,7 @@ class _DashBoardState extends State<DashBoard> {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Feather.getIconData("log-out"),
-            ),
-            iconSize: 30.0,
-            color: Colors.white,
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-              return Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => Login2()));
-            },
-          ),
-          centerTitle: true,
+          automaticallyImplyLeading: false,
           title: Text(
             'Chats',
             style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
@@ -52,8 +43,10 @@ class _DashBoardState extends State<DashBoard> {
           actions: <Widget>[
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Profile(doctorData)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Profile(doctorData)));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -63,6 +56,18 @@ class _DashBoardState extends State<DashBoard> {
                         // radius: 20.0,
                         backgroundImage: NetworkImage(doctorData["urlSelfi"]))),
               ),
+            ),
+            IconButton(
+              icon: Icon(
+                Feather.getIconData("log-out"),
+              ),
+              iconSize: 30.0,
+              color: Colors.white,
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                return Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => Login2()));
+              },
             ),
           ],
         ),
@@ -93,11 +98,11 @@ class _DashBoardState extends State<DashBoard> {
         child: StreamBuilder(
             stream: Firestore.instance
                 .collection('chat')
-                .orderBy('LastMessageTime',descending: true)
+                .orderBy('LastMessageTime', descending: true)
                 .where('DoctorID', isEqualTo: doctorData["DoctorID"])
                 .snapshots(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.data.documents.length > 0) {
                 return ListView.builder(
                   itemCount: snapshot.data.documents.length,
                   itemBuilder: (BuildContext context, int index) {

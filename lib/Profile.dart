@@ -1,24 +1,49 @@
 import 'package:flutter/material.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter_icons/flutter_icons.dart';
-// import 'package:feathers/feathers.dart';
-// import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'login2.dart';
 
 class Profile extends StatefulWidget {
   Profile(this.doctorData);
+
   final doctorData;
+
   @override
   _ProfileState createState() => _ProfileState(doctorData);
 }
 
 class _ProfileState extends State<Profile> {
   _ProfileState(this.doctorData);
+
   final doctorData;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(171, 31, 94, 1),
+      appBar: AppBar(
+        title: Text(
+          "Profile",
+          style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+        ),
+        elevation: 0.0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Feather.getIconData("log-out"),
+            ),
+            iconSize: 30.0,
+            color: Colors.white,
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              return Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Login2()));
+            },
+          ),
+        ],
+      ),
       body: Container(
         child: ListView(
           children: <Widget>[

@@ -6,13 +6,16 @@ import 'package:flutter/material.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 class ChatScreen extends StatefulWidget {
   ChatScreen(this.chatdata);
+
   final chatdata;
+
   @override
   _ChatScreenState createState() => _ChatScreenState(chatdata);
 }
 
 class _ChatScreenState extends State<ChatScreen> {
   _ChatScreenState(this.chatdata);
+
   final chatdata;
   final databaseReference = Firestore.instance;
   final messageController = TextEditingController();
@@ -188,10 +191,10 @@ class _ChatScreenState extends State<ChatScreen> {
     messageController.text = "";
     await databaseReference.collection("messages").add({
       'Message': '$msgTxt',
+      "MessageID": "${chatdata['UserId']}${chatdata['DoctorID']}",
       'Sender': 'Doctor',
       'Receiver': 'User',
       'DoctorID': chatdata['DoctorID'],
-      
       'ChatID': "${chatdata['UserID']}${chatdata['DoctorID']}",
       'UserID': chatdata['UserID'],
       'MessageTime': FieldValue.serverTimestamp()
