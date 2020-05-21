@@ -86,6 +86,7 @@ class _SignupState2 extends State<SignUpStep2> {
                           height: 30,
                         ),
                         Text(
+                          "Choose Your Degree",
                           style: TextStyle(
                             fontSize: 22,
                             color: Color.fromRGBO(171, 31, 95, 1),
