@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:teme_doctor/RegisterNextStep.dart';
 import 'package:teme_doctor/login2.dart';
 import 'package:teme_doctor/pending.dart';
 
@@ -597,21 +596,18 @@ class _SignupState extends State<SignUp> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SignUpStep2()));
-//                                  if (terms == false ||
-//                                      _imgageSelfi == null ||
-//                                      _imagesCNIC == null ||
-//                                      _specialtyValue == null) {
-//                                    setState(() {
-//                                      message =
-//                                          "Please Upload CNIC and Photo And Check on Term & Conditions";
-//                                    });
-//                                  } else if (_formKey.currentState.validate()) {
-//                                    signUp(context);
-//                                  }
+
+                                  if (terms == false ||
+                                      _imgageSelfi == null ||
+                                      _imagesCNIC == null ||
+                                      _specialtyValue == null) {
+                                    setState(() {
+                                      message =
+                                          "Please Upload CNIC and Photo And Check on Term & Conditions";
+                                    });
+                                  } else if (_formKey.currentState.validate()) {
+                                    signUp(context);
+                                  }
                                 },
                                 label: Text("Next Step"),
                                 icon: Icon(Icons.arrow_forward),

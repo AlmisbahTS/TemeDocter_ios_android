@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:teme_doctor/DashBord.dart';
 import 'package:teme_doctor/login2.dart';
-// import 'package:teme_doctor/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login/login.dart';
 import 'package:teme_doctor/pending.dart';
 
-import 'RegisterNextStep.dart';
 
 // import 'package:teme/home.dart';
 // import 'package:teme/pages/feature.dart';
@@ -54,16 +52,16 @@ class _HomePageState extends State<Home> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100)),
                       onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignUpStep2()));
+//                        Navigator.pushReplacement(
+//                            context,
+//                            MaterialPageRoute(
+//                                builder: (context) => SignUpStep2()));
 //
-                        // signout();
-//                        Login(
-//                          loggedIn: signin2(),
-//                          loggedOut: signout(),
-//                        );
+                        signout();
+                        Login(
+                          loggedIn: signin2(),
+                          loggedOut: signout(),
+                        );
                       },
                       child: Text(
                         "Login",
@@ -120,17 +118,17 @@ class _HomePageState extends State<Home> {
             .document(currentuser.uid)
             .get()
             .then((DocumentSnapshot result) {
-              if (result["Status"] == "Pending") {
-                 Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => PendingPage()));
-              } else if(result["Status"] == "Confirmed"){
-                 Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => DashBoard(result)));
-              }else{
-              //    Navigator.pushReplacement(context,
-              // MaterialPageRoute(builder: (context) => Login2()));
-              }
-         
+          if (result["Status"] == "Pending") {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => PendingPage()));
+          } else if (result["Status"] == "Confirmed") {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => DashBoard(result)));
+          } else {
+            //    Navigator.pushReplacement(context,
+            // MaterialPageRoute(builder: (context) => Login2()));
+          }
+
           // Navigator.pushReplacement(context,
           //     MaterialPageRoute(builder: (context) => ChatScreen()));
         });
